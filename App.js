@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import AppButton from './application/components/AppButton';
 import PreLoader from './application/components/PreLoader';
+import BackgroundImage from './application/components/BackgroundImage';
+import Start from './application/screens/Start';
 
 export default function App() {
   return (
@@ -18,6 +20,12 @@ export default function App() {
         /> 
       </View>
       <PreLoader/>
+      <BackgroundImage
+        source={require('./assets/blurred-background.jpg')}
+      >
+        <Text>HOLA!!</Text>
+      </BackgroundImage>
+      <Start/>
     </>
   );
 }
