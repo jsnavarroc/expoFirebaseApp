@@ -1,4 +1,4 @@
- // Initialize Firebase
+ /* Initialize Firebase */
  export default {
     apiKey: "AIzaSyDTKIU1pxo_wRWt08_BeU4r8Kkln5OiwQo",
     authDomain: "cursoexpofirebase-90bb5.firebaseapp.com",
