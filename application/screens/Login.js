@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
-import FormValidation from '../utils/validation';
-import BackgroundImage from '../components/BackgroundImage';
+
 import {View} from 'react-native';
 import {Card} from 'react-native-elements';
-import AppButton from '../components/AppButton';
-import Toast from 'react-native-simple-toast';
 import firebase from 'firebase'; 
+import Toast from 'react-native-simple-toast';
+import FormValidation from '../utils/validation';
+import BackgroundImage from '../components/BackgroundImage';
+import AppButton from '../components/AppButton';
+
 const Form = t.form.Form;
 class Login extends Component {
     constructor() {

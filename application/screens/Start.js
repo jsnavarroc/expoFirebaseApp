@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
+import firebase from 'firebase'; 
 import {View} from 'react-native';
+import Toast from 'react-native-simple-toast';
+import { NavigationActions } from 'react-navigation';
 import BackgroundImage from '../components/BackgroundImage';
 import AppButton from '../components/AppButton';
-import { NavigationActions } from 'react-navigation';
-import Firebase from '../utils/firebase';
-import firebase from 'firebase'; 
 import facebook from '../utils/facebook';
-import Toast from 'react-native-simple-toast';
-firebase.initializeApp(Firebase);
+import firebaseConfig from '../utils/firebase';
 
+firebase.initializeApp(firebaseConfig);
 class Start extends Component {
+
+    static navigationOption = {
+        title: 'Expo App'
+    }
+
     login(){
         const navigateAction = NavigationActions.navigate({
             routeName: 'Login'
@@ -25,6 +30,7 @@ class Start extends Component {
         this.props.navigation.dispatch(navigateAction);
 
     }
+
     async facebook(){
         const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync(
             facebook.config.application_id, 
@@ -32,7 +38,6 @@ class Start extends Component {
         );
 
         // signInWithCredential(credentials)
-        //signInAndRetrieveDataWithCredential(credentials)
         if (type === 'success') {
             const credentials = firebase.auth.FacebookAuthProvider.credential(token);
             firebase.auth().signInAndRetrieveDataWithCredential(credentials)
