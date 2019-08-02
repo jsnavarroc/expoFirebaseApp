@@ -1,13 +1,14 @@
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Dimensions} from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button} from 'react-native-elements';
 import React from 'react';
 import PropTypes from 'prop-types';
 
 const AppButton = (props) => {
     var width = 0;
     const {action, iconName, iconColor, title, bgColor, iconSize, widthProp} = props;
-    width =  widthProp ?  widthProp : Dimensions.get('window').width;
+    widthProp ?  width = widthProp : width = Dimensions.get('window').width;
 
     const butttonStyles = {
         backgroundColor:bgColor,
@@ -48,3 +49,4 @@ AppButton.propTypes = {
 
 
 export default AppButton;
+

@@ -1,32 +1,47 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import AppButton from './application/components/AppButton';
+import { StyleSheet, View } from 'react-native';
+import GuestNavigation from './application/routes/guest';
+import firebase from 'firebase'; 
+import {Text} from 'react-native-elements';
 import PreLoader from './application/components/PreLoader';
-
-export default function App() {
-  return (
-    <>
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app! Johan</Text>
-        <AppButton
-          title={"text"}
-          bgColor={"rgba(111,38,74,0.7)"}
-          action={()=>console.log(1)}
-          iconName = {"sign-in"}
-          iconSize = {30}
-          iconColor ={"#fff"}
-        /> 
-      </View>
-      <PreLoader/>
-    </>
-  );
+export default class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      isLogged : false,
+      loaded : false,
+    }
+  }
+  
+  async componentWillMount(){
+    await firebase.auth().onAuthStateChanged(user => {
+      if(user!==null){
+        this.setState({
+          isLogged : true,
+          loaded : true,
+        });
+      }else{
+        this.setState({
+          isLogged : false,
+          loaded : true,
+        });
+      }
+    });
+    
+    // firebase.auth().signOut();
+    
+  }
+  
+  render() {
+    const {isLogged, loaded} = this.state;
+    if(!loaded){
+      return (<PreLoader/>)
+    }
+    if(isLogged){
+      return (<Text> Logueado </Text>);
+    }else{
+      return (<GuestNavigation/>); 
+    }
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex : 1, //with this we indicate that it takes as much space as it can
-    flexDirection : 'column',  //with this we indicate that it takes much space as it cana vertical 
-    justifyContent : 'center', //we want to center all the elements
-    backgroundColor: '#fff',
-  },
-});
