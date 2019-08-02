@@ -28,7 +28,7 @@ export default class App extends React.Component {
       }
     });
     
-    // firebase.auth().signOut();
+    firebase.auth().signOut();
     
   }
   
